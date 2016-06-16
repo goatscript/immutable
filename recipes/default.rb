@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: immutable
-# Recipe:: chattr
+# Recipe:: default
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
@@ -10,7 +10,6 @@ cookbook_file '/opt/chef-vault-2.9.0.gem' do
   action :nothing
 end.run_action(:create)
 
-#Chef::Resource::File.resource_name(:cookbook_file=>'chef-vault-2.9.0.gem').run_action(:create)
 
 chef_gem 'chef-vault' do
   compile_time true
@@ -23,7 +22,6 @@ require 'chef-vault'
 unique = ChefVault::Item.load('machine_lock',"#{node[:immutable][:vault_info]}")
 
 pathway = node[:immutable][:immutable_file]
-#unique = data_bag_item('machine_lock','ticket')
 
 template pathway do
   mode '0444'
